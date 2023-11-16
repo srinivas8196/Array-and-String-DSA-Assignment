@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Materialize Tabs</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="tabs">
+            <li class="tab col s4"><a href="#question1">Question 1</a></li>
+            <li class="tab col s4"><a href="#question2">Question 2</a></li>
+            <li class="tab col s4"><a href="#question3">Question 3</a></li>
+        </ul>
+
+        <!-- Question 1: Print Duplicate Elements -->
+        <div id="question1" class="col s12">
+            <h5>Print Duplicate Elements</h5>
+            <form id="duplicateForm">
+                <div class="input-field col s12">
+                    <input type="text" id="duplicateInput" placeholder="Enter numbers (comma-separated)">
+                    <label for="duplicateInput">Numbers</label>
+                </div>
+                <button class="btn waves-effect waves-light" type="button" onclick="printDuplicates()">Submit</button>
+            </form>
+            <div class="output" id="duplicateOutput"></div>
+        </div>
+
+        <!-- Question 2: Find Element with Highest Frequency -->
+        <div id="question2" class="col s12">
+            <h5>Find Element with Highest Frequency</h5>
+            <form id="frequencyForm">
+                <div class="input-field col s12">
+                    <input type="text" id="frequencyInput" placeholder="Enter numbers (comma-separated)">
+                    <label for="frequencyInput">Numbers</label>
+                </div>
+                <button class="btn waves-effect waves-light" type="button" onclick="findHighestFrequency()">Submit</button>
+            </form>
+            <div class="output" id="frequencyOutput"></div>
+        </div>
+
+        <!-- Question 3: Check Palindrome String -->
+        <div id="question3" class="col s12">
+            <h5>Check Palindrome String</h5>
+            <form id="palindromeForm">
+                <div class="input-field col s12">
+                    <input type="text" id="palindromeInput" placeholder="Enter a string">
+                    <label for="palindromeInput">String</label>
+                </div>
+                <button class="btn waves-effect waves-light" type="button" onclick="checkPalindrome()">Submit</button>
+            </form>
+            <div class="output" id="palindromeOutput"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        M.AutoInit();
+
+        // Function to print duplicate elements
+        function printDuplicates() {
+            const input = document.getElementById('duplicateInput').value;
+            const numbers = input.split(',').map(num => parseInt(num.trim()));
+            const duplicates = numbers.filter((num, index, self) => self.indexOf(num) !== index);
+            document.getElementById('duplicateOutput').innerText = duplicates.join(', ');
+        }
+
+        // Function to find element with highest frequency
+        function findHighestFrequency() {
+            const input = document.getElementById('frequencyInput').value;
+            const numbers = input.split(',').map(num => parseInt(num.trim()));
+            const frequencyCounter = {};
+            let maxFreqElement = null;
+            let maxFreq = 0;
+
+            numbers.forEach(num => {
+                frequencyCounter[num] = (frequencyCounter[num] || 0) + 1;
+
+                if (frequencyCounter[num] > maxFreq) {
+                    maxFreq = frequencyCounter[num];
+                    maxFreqElement = num;
+                }
+            });
+
+            document.getElementById('frequencyOutput').innerText = maxFreqElement;
+        }
+
+        // Function to check palindrome string
+        function checkPalindrome() {
+            const input = document.getElementById('palindromeInput').value.toLowerCase();
+            const isPalindrome = input === input.split('').reverse().join('');
+            document.getElementById('palindromeOutput').innerText = isPalindrome ? 'Palindrome' : 'Not Palindrome';
+        }
+    </script>
+</body>
+</html>
